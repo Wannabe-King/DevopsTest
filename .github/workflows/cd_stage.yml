@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy the frontend to staging
     steps:
-      -run: |
+      - run: |
         echo "${{ secrets.SSH_PRIVATE_KEY }}" &> ~/ssh_key
         chmod 700 /home/runner/ssh_key
         ssh -i ~/ssh_key -o StrictHostKeyChecking=no ubuntu@16.171.134.255 -t "cd DevopsTest/ && git pull origin main && export PATH=/home/ubuntu/.nvm/versions/node/v22.16.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin && pnpm install && pnpm run build && pm2 restart http-server && pm2 restart ws-server && pm2 restart fe-server"
