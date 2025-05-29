@@ -15,4 +15,4 @@ jobs:
          touch /home/runner/.ssh/known_hosts
          echo "${{ secrets.KNOWN_HOSTS }}" &> /home/runner/.ssh/known_hosts
          chmod 700 /home/runner/ssh_key
-         ssh -v -i /home/runner/ssh_key -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -o ServerAliveCountMax=3 ubuntu@16.171.134.255 "cd DevopsTest/ && git pull origin main && export PATH=/home/ubuntu/.nvm/versions/node/v22.16.0/bin:\$PATH && npm install -g pnpm && pnpm install && pnpm run build && pm2 restart http-server && pm2 restart ws-server && pm2 restart fe-server"
+         ssh -v -i /home/runner/ssh_key \ -o StrictHostKeyChecking=no \ -o ServerAliveInterval=60 \ -o ServerAliveCountMax=3 \ ubuntu@16.171.134.255 "cd DevopsTest/ && git pull origin main && export PATH=/home/ubuntu/.nvm/versions/node/v22.16.0/bin:\$PATH && npm install -g pnpm && pnpm install && pnpm run build && pm2 restart http-server && pm2 restart ws-server && pm2 restart fe-server"
