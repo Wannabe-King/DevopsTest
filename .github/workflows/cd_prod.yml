@@ -1,0 +1,18 @@
+name: Deploy to stage
+on:
+  push:
+    branches: [ production ]
+
+jobs:
+  redeploy_everything:
+    runs-on: ubuntu-latest
+    name: Deploy the frontend to production
+    steps:
+      - run: |
+         echo "${{ secrets.SSH_PRIVATE_KEY }}" &> ~/ssh_key
+         mkdir -p /home/runner/.ssh
+         ls /home/runner/.ssh
+         touch /home/runner/.ssh/known_hosts
+         echo "${{ secrets.KNOWN_HOSTS }}" &> /home/runner/.ssh/known_hosts
+         chmod 600 /home/runner/ssh_key
+         ssh -v -o StrictHostKeyChecking=no -i /home/runner/ssh_key  ubuntu@56.228.3.17 -t "cd DevopsTest/ && git pull origin main && export PATH=/home/ubuntu/.nvm/versions/node/v22.16.0/bin:\$PATH && npm install -g pnpm && pnpm install && pnpm run build && pm2 restart http-server && pm2 restart ws-server && pm2 restart fe-server"
