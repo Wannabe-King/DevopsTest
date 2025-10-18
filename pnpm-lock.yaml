@@ -128,13 +128,13 @@ importers:
 
   packages/prisma:
     dependencies:
-      '@prisma/client':
-        specifier: 6.8.2
-        version: 6.8.2(prisma@6.8.2(typescript@5.8.2))(typescript@5.8.2)
       prisma:
         specifier: ^6.8.2
         version: 6.8.2(typescript@5.8.2)
     devDependencies:
+      '@prisma/client':
+        specifier: 6.8.2
+        version: 6.8.2(prisma@6.8.2(typescript@5.8.2))(typescript@5.8.2)
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
